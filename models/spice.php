@@ -1,5 +1,4 @@
 <?php
-// $dbconn = pg_connect('host=localhost dbname=binge');
 
 $dbconn = null;
 if(getenv('DATABASE_URL')){
@@ -17,16 +16,14 @@ if(getenv('DATABASE_URL')){
         "dbname=".$dbname
     );
 } else {
-    $dbconn = pg_connect("host=localhost dbname=binge");
+    $dbconn = pg_connect("host=localhost dbname=spicetracker");
 }
 
-class Show {
+class Spice {
     public $id;
-    public $tmdb_id;
     public $name;
     public $category;
     public $date_purchased;
-    public $current_episode;
     public function __construct($id, $name, $category, $date_purchased){
         $this->id = $id;
         $this->name = $name;
@@ -35,7 +32,7 @@ class Show {
     }
 }
 
-class Shows {
+class Spices {
     static function create($spice){
         $query = "INSERT INTO spices (name, category, date_purchased) VALUES ($1, $2, $3)";
         $query_params = array($spice->name, $spice->category, $spice->date_purchased);
@@ -63,7 +60,7 @@ class Shows {
 
         $row_object = pg_fetch_object($results);
         while($row_object) {
-            $new_spice = new Show(
+            $new_spice = new Spice(
                 intval($row_object->id),
                 $row_object->name,
                 $row_object->category,
