@@ -56,7 +56,7 @@ class Spices {
     static function all(){
         $spices = array();
 
-        $results = pg_query("SELECT * FROM spices ORDER BY name");
+        $results = pg_query("SELECT * FROM spices ORDER BY category, name");
 
         $row_object = pg_fetch_object($results);
         while($row_object) {
