@@ -41,7 +41,7 @@ class Spices {
     }
     static function update($updated_spice){
         $query = "UPDATE spices SET name=$1, category=$2, date_purchased=$3 WHERE id=$4";
-        $query_params = array($updated_spice->name, $updated_spice->category, $updated_spice->date_purchased, $updated_spice->current_episode, $updated_spice->id);
+        $query_params = array($updated_spice->name, $updated_spice->category, $updated_spice->date_purchased, $updated_spice->id);
         pg_query_params($query,$query_params);
 
         return self::all();

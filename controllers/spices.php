@@ -9,14 +9,14 @@ if($_REQUEST['action'] === 'index'){
 } else if($_REQUEST['action'] === 'create') {
     $request_body = file_get_contents('php://input');
     $body_object = json_decode($request_body);
-    $new_spice = new Spice(null, $body_object->name, $body_object->category, $body_object->date_purchased);
+    $new_spice = new Spice(null, $body_object->name, $body_object->category, $body_object->date);
     $all_spices = Spices::create($new_spice);
 
     echo json_encode($all_spices);
 } else if($_REQUEST['action'] ==='update'){
     $request_body = file_get_contents('php://input');
     $body_object = json_decode($request_body);
-    $updated_spice = new Spice($_REQUEST['id'], $body_object->name, $body_object->category, $body_object->date_purchased);
+    $updated_spice = new Spice($_REQUEST['id'], $body_object->name, $body_object->category, $body_object->date);
     $all_spices = Spices::update($updated_spice);
 
     echo json_encode($all_spices);
